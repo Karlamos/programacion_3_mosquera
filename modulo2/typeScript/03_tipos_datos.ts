@@ -1,18 +1,18 @@
 // tipos-string.ts
-const nombre:    string = "Ana García";
-const saludo:    string = `Hola, ${nombre}`;
+const nombre1:    string = "Ana García";
+const saludo:    string = `Hola, ${nombre1}`;
 const vacia:     string = "";
 const comillas:  string = 'También con comillas simples';
 
-console.log(nombre);
+console.log(nombre1);
 console.log(saludo);
 console.log(`La cadena vacía tiene longitud: ${vacia.length}`);
 
 // Métodos de string funcionan igual que en JS
-console.log(nombre.toUpperCase());      // ANA GARCÍA
-console.log(nombre.toLowerCase());      // ana garcía
-console.log(nombre.includes("García")); // true
-console.log(nombre.split(" "));         // ["Ana", "García"]
+console.log(nombre1.toUpperCase());      // ANA GARCÍA
+console.log(nombre1.toLowerCase());      // ana garcía
+console.log(nombre1.includes("García")); // true
+console.log(nombre1.split(" "));         // ["Ana", "García"]
 
 
 
@@ -95,7 +95,7 @@ console.log(dato.metodoQueNoExiste()); // TypeScript no avisa, pero falla al eje
 
 // tipo-unknown.ts
 
-function procesarDato(valor: unknown): string {
+function procesarDato1(valor: unknown): string {
   // No puedo usar valor directamente — debo verificar primero
 
   if (typeof valor === "string") {
@@ -115,38 +115,11 @@ function procesarDato(valor: unknown): string {
   return "Tipo no reconocido";
 }
 
-console.log(procesarDato("hola"));   // HOLA
-console.log(procesarDato(3.14159));  // 3.14
-console.log(procesarDato(true));     // Sí
-console.log(procesarDato(null));     // Tipo no reconocido
+console.log(procesarDato1("hola"));   // HOLA
+console.log(procesarDato1(3.14159));  // 3.14
+console.log(procesarDato1(true));     // Sí
+console.log(procesarDato1(null));     // Tipo no reconocido
 
 
 
 
-
-// tipo-unknown.ts
-
-function procesarDato(valor: unknown): string {
-  // No puedo usar valor directamente — debo verificar primero
-
-  if (typeof valor === "string") {
-    // Aquí TypeScript sabe que es string
-    return valor.toUpperCase();
-  }
-
-  if (typeof valor === "number") {
-    // Aquí TypeScript sabe que es number
-    return valor.toFixed(2);
-  }
-
-  if (typeof valor === "boolean") {
-    return valor ? "Sí" : "No";
-  }
-
-  return "Tipo no reconocido";
-}
-
-console.log(procesarDato("hola"));   // HOLA
-console.log(procesarDato(3.14159));  // 3.14
-console.log(procesarDato(true));     // Sí
-console.log(procesarDato(null));     // Tipo no reconocido
