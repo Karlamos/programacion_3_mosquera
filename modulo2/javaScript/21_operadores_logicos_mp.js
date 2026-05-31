@@ -1,3 +1,5 @@
+const prompt = require('prompt-sync')();
+
 // Valores FALSY — los únicos 6 que existen en JavaScript
 false
 0

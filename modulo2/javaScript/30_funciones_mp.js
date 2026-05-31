@@ -38,8 +38,6 @@ saludarEstudiante(" Karla");
 function calcularPuntajeTotal(lecciones, bonus){
     return lecciones + bonus;
 }
-// const resultadoPuntaje = calcularPuntajeTotal(45, 5);
-// console.log(resultadoPuntaje);
 
 // Sintaxis: function nombre(parámetros) { cuerpo }
 function generarCertificado(nombreEstudiante) {
@@ -111,10 +109,8 @@ function registrarBitacora(categoria, ...mensajesAlerta) {
   }
 }
 
-registrar("CURSO_INFO", "Estudiante conectado", "Video reproducido", "Cuestionario completado");
-// [CURSO_INFO] Estudiante conectado
-// [CURSO_INFO] Video reproducido
-// [CURSO_INFO] Cuestionario completado
+// CORREGIDO: Se cambió 'registrar' por 'registrarBitacora'
+registrarBitacora("CURSO_INFO", "Estudiante conectado", "Video reproducido", "Cuestionario completado");
 
 
 function registrarDatosEstudiante(...datosPerfil){
@@ -147,7 +143,7 @@ console.log(rutaFullStack);   // ["HTML", "CSS", "JS Basic", "Python", "Django",
 const notasOriginales = [8, 9, 10];
 const notasClonadas   = [...notasOriginales];
 notasClonadas.push(7);
-console.log(notasOriginales);   // [8, 9, 10]  — original intacto
+console.log(notasOriginales);   // [8, 9, 10] — original intacto
 console.log(notasClonadas);     // [8, 9, 10, 7]
 
 // Spread con objetos de perfil
@@ -178,10 +174,6 @@ console.log(procesarEstadisticas(10, 3, (a, b) => a ** b));       // 1000
 // === PROGRAMA: CALCULADORA DE CONTENIDO ===
 const prompt = require("prompt-sync")();
 
-// Funciones puras para el procesamiento de métricas
-// const sumarNotas   = (a, b) => a + b;
-// const restarHoras  = (a, b) => a - b;
-// const multiplicarPorModulos = (a, b) => a * b;
 const dividirHoras = (a, b) => {
  if (b === 0) return "Error: divisor no puede ser cero";
   return a / b;
@@ -189,7 +181,14 @@ const dividirHoras = (a, b) => {
 
 // Función principal de control que agrupa las operaciones
 function calcularMetricas(a, b, operador) {
-  const mapeoOperaciones = { "+": sumarNotas, "-": restarHoras, "*": multiplicarPorModulos, "/": dividirHoras };
+  // Nota: usa las funciones sumarNotas, restarHoras y multiplicarPorModulos que declaramos arriba en la sección de Callbacks
+  const mapeoOperaciones = { 
+    "+": sumarNotas, 
+    "-": restarHoras, 
+    "*": multiplicarPorModulos, 
+    "/": dividirHoras 
+  };
+  
   const ejecutarFn = mapeoOperaciones[operador];
   if (!ejecutarFn) return `Operación "${operador}" no válida para el sistema`;
   return ejecutarFn(a, b);
@@ -206,7 +205,7 @@ function leerEntradaNumerica(mensajePregunta) {
 }
 
 // Flujo de ejecución en terminal
-console.log("=== Analizador de Métricas de Estudio ===");
+console.log("\n=== Analizador de Métricas de Estudio ===");
 
 const metricaA   = leerEntradaNumerica("Ingresa el primer indicador (ej. Horas logueadas): ");
 const metricaB   = leerEntradaNumerica("Ingresa el segundo indicador (ej. Número de tareas): ");

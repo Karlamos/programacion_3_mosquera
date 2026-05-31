@@ -16,3 +16,4 @@
 function buscarCurso(curso) {
     return `Buscando disponibilidad para el curso: ${curso}`;
   }
+console.log(buscarCurso("JavaScript"));

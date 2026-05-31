@@ -1,3 +1,7 @@
+// === DECLARACIÓN DE VARIABLES (Faltaba esto) ===
+const cuponDescuento = null;
+const fechaInscripcion = undefined;
+
 // Con igualdad estricta: solo son iguales entre sí
 console.log(cuponDescuento === null);        // true
 console.log(fechaInscripcion === undefined); // true
