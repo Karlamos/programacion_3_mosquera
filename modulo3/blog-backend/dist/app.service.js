@@ -1,0 +1,86 @@
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.AppService = void 0;
+const common_1 = require("@nestjs/common");
+let AppService = class AppService {
+    products = [
+        {
+            id: 1,
+            name: "Laptop",
+            price: 850,
+            stock: 10
+        },
+        {
+            id: 2,
+            name: "Mouse",
+            price: 25,
+            stock: 50
+        },
+    ];
+    getHeath() {
+        return {
+            "status": "Online",
+            "service": "blog service api",
+            "version": "0.0.1",
+            "date": new Date()
+        };
+    }
+    createProduct(product) {
+        const newProduct = {
+            id: Math.floor(Math.random() * 1000) + 1,
+            ...product
+        };
+        this.products.push(newProduct);
+        return {
+            "id": newProduct.id,
+            "name": newProduct.name,
+            "price": newProduct.price,
+            "stock": newProduct.stock
+        };
+    }
+    findAll() {
+        return this.products;
+    }
+    findById(id) {
+        return this.products
+            .find(product => product.id === Number(id));
+    }
+    update(id, updatedProductDto) {
+        const product = this.products
+            .find(product => product.id === Number(id));
+        if (!product) {
+            return;
+        }
+        Object.assign(product, updatedProductDto);
+        return product;
+    }
+    deleteById(id) {
+        const index = this.products
+            .findIndex(product => product.id === Number(id));
+        if (index === -1) {
+            return;
+        }
+        const deletedProduct = this.products[index];
+        this.products.splice(index, 1);
+        return deletedProduct;
+    }
+    areaTriangulo(data) {
+        const area = (data.base * data.altura) / 2;
+        return {
+            "base": data.base,
+            "altura": data.altura,
+            "areaTriangulo": area,
+        };
+    }
+};
+exports.AppService = AppService;
+exports.AppService = AppService = __decorate([
+    (0, common_1.Injectable)()
+], AppService);
+//# sourceMappingURL=app.service.js.map
