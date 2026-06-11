@@ -34,6 +34,7 @@ function renderProductos(){
             <td>${producto.precio.toFixed(2)}</td>
             <td>
                 <button onclick = "editarProducto(${producto.id})">Editar</button>
+                <button onclick = "eliminarProducto(${producto.id})">Eliminar</button>
             </td>
         `;
         cuerpoTabla.appendChild(productoElement);
@@ -41,26 +42,34 @@ function renderProductos(){
 }
 
 
-function agregarProducto(){
-    const nombreInput = document.getElementById('nombre').ariaValueMax.trim();
-    const descripcionInput = document.getElementById('descripcion').ariaValueMax.trim();
-    const precioInput = document.getElementById('precio').ariaValueMax.trim();
+function agregarProducto() {
+    const nombreInput = document
+        .getElementById('nombre').value.trim();
+    const descripcionInput = document
+        .getElementById('descripcion').value.trim();
+    const precioInput = document
+        .getElementById('precio').value.trim();
 
-    if (!nombreInput || !descripcionInput || !precioInput){
-        alert('Por favor, complete todos los campos.')
+    if (!nombreInput || !descripcionInput
+        || !precioInput) {
+        alert('Por favor, complete todos los campos.');
         return;
     }
-    const nuevoProducto ={
-        id:productos.length >0 ? Math.max(...productos.map(p => p.id))+1 : 1,
+
+    const nuevoProducto = {
+        id: productos.length > 0 ? Math.max(...productos.map(p => p.id)) + 1 : 1,
         nombre: nombreInput,
         descripcion: descripcionInput,
         precio: parseFloat(precioInput)
-
     };
+
     productos.push(nuevoProducto);
-    renderProductos()
-    limpiarFormulario;
+    renderProductos();
 }
+
+window.onload = function() {
+    renderProductos();
+};
 
 window.onload=function(){
     renderProductos();
@@ -130,6 +139,32 @@ function cancelarEdicion(){
 }
 const cancelarBtn = document.getElementById('btn_cancelar');
 cancelarBtn.addEventListener('click', cancelarEdicion);
+
+
+function eliminarProducto(id){
+    const index = productos.findIndex(p => p.id === id);
+    if (index !== -1){
+        if(confirm('¿Estas seguro de elinar este producto?')){
+            productos.splice(index, 1);
+            renderProductos();
+        }
+    }
+}
+
+
+function actualizarEstadisticas(){
+    const totalProductos = productos.length;
+    const precioPromedio = totalProductos > 0 ? (productos.reduce((sum, p) => sum + p.precio, 0)/totalProductos).toFixed(2):0;
+    document.getElementById('totalProductos').textContent =totalProductos;
+    document.getElementById('precioPromedio').textContent =precioPromedio;
+    const productoMasCaro = productos.length > 0?
+        Math.max(...productos.map(p => p.precio)): 0;
+    const productoMasBarato = productos.length > 0 ?
+        Math.min(...productos.map(p => p.precio)): 0;
+    document.getElementById('productoMasCaro').textContent=productoMasCaro
+    document.getElementById('productoMasBarato').textContent=productoMasBarato
+}
+
 
 window.onload=function(){
     renderProductos();
