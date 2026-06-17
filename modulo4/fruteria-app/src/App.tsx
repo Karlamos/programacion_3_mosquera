@@ -5,14 +5,21 @@ import WelcomeBanner       from './components/WelcomeBanner'
 import UserGreeting        from './components/UserGreeting'
 
 import CurrentDateDisplay  from './components/CurrentDateDisplay'
-/*
+
 import ColoredBox          from './components/ColoredBox'
+
 import ConditionalGreeting from './components/ConditionalGreeting'
+
 import FruitList           from './components/FruitList'
+
 import PriceTag            from './components/PriceTag'
+
 import StatusBadge         from './components/StatusBadge'
+
 import MiniProfileCard     from './components/MiniProfileCard'
+
 import SimpleInfoTable     from './components/SimpleInfoTable'
+/*
 import ProductCard         from './components/ProductCard'
 import ProductCatalogList  from './components/ProductCatalogList'
 import UserProfileCard     from './components/UserProfileCard'
@@ -33,7 +40,7 @@ import UserProfileCard     from './components/UserProfileCard'
 // │  12  ProductCatalogList  — lista con renderizado condicional de items   │
 // │  13  UserProfileCard     — ejercicio: props complejas + rol             │
 // └──────────────────────────────────────────────────────────────────────────┘
-const PASO = 3
+const PASO = 10
 
 const fruits = [
   { name: 'Manzana', emoji: '🍎', calories: 52 },
@@ -56,7 +63,7 @@ export default function App() {
 
    
     PASO ===  3 ? <CurrentDateDisplay /> :
-     /*
+     
     PASO ===  4 ? (
       <div style={{ display: 'flex', gap: 12 }}>
         <ColoredBox color="#0070f3" label="Primary" />
@@ -64,14 +71,18 @@ export default function App() {
         <ColoredBox color="#e00"    label="Danger" />
       </div>
     ) :
+   
     PASO ===  5 ? <ConditionalGreeting isLoggedIn={true} userName="Ana" timeOfDay="afternoon" /> :
+ 
     PASO ===  6 ? <FruitList fruits={fruits} title="Frutas favoritas" /> :
+
     PASO ===  7 ? (
       <div style={{ display: 'flex', gap: 24, alignItems: 'flex-end' }}>
         <PriceTag amount={99.99} currency="USD" />
         <PriceTag amount={99.99} currency="USD" discountPercent={20} />
       </div>
     ) :
+           
     PASO ===  8 ? (
       <div style={{ display: 'flex', gap: 8 }}>
         <StatusBadge status="active" />
@@ -80,6 +91,7 @@ export default function App() {
         <StatusBadge status="inactive" />
       </div>
     ) :
+    
     PASO ===  9 ? (
       <MiniProfileCard
         fullName="Ana García"
@@ -89,6 +101,7 @@ export default function App() {
         joinedYear={2019}
       />
     ) :
+    
     PASO === 10 ? (
       <SimpleInfoTable
         title="Resumen del pedido"
@@ -99,6 +112,7 @@ export default function App() {
         ]}
       />
     ) :
+    /*
     PASO === 11 ? <ProductCard title="Teclado inalámbrico" description="Bluetooth 5.0, retroiluminado" highlighted /> :
     PASO === 12 ? <ProductCatalogList products={catalog} title="Productos disponibles" /> :
     PASO === 13 ? (
