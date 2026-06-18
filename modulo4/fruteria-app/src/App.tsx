@@ -46,6 +46,9 @@ const fruits = [
   { name: 'Manzana', emoji: '🍎', calories: 52 },
   { name: 'Banana',  emoji: '🍌', calories: 89 },
   { name: 'Naranja', emoji: '🍊', calories: 47 },
+  { name: 'Kiwi', emoji: '🥝', calories: 61 },
+  { name: 'Pera', emoji: '🍐', calories: 57 },
+  { name: 'Aguacate', emoji: '🥑', calories: 27 },
 ]
 
 const catalog = [
@@ -66,13 +69,14 @@ export default function App() {
      
     PASO ===  4 ? (
       <div style={{ display: 'flex', gap: 12 }}>
-        <ColoredBox color="#0070f3" label="Primary" />
-        <ColoredBox color="#22c55e" label="Success" />
-        <ColoredBox color="#e00"    label="Danger" />
+        <ColoredBox color="#f59e0b" label="Primary" width={120} height={40} />
+        <ColoredBox color="#8b5cf6" label="Success" />
+        <ColoredBox color="#ec4899"  borderRadius={50}/>
+        
       </div>
     ) :
    
-    PASO ===  5 ? <ConditionalGreeting isLoggedIn={true} userName="Ana" timeOfDay="afternoon" /> :
+    PASO ===  5 ? <ConditionalGreeting isLoggedIn={false} userName="Carlos" timeOfDay="morning" /> :
  
     PASO ===  6 ? <FruitList fruits={fruits} title="Frutas favoritas" /> :
 
@@ -112,20 +116,9 @@ export default function App() {
         ]}
       />
     ) :
-    /*
-    PASO === 11 ? <ProductCard title="Teclado inalámbrico" description="Bluetooth 5.0, retroiluminado" highlighted /> :
-    PASO === 12 ? <ProductCatalogList products={catalog} title="Productos disponibles" /> :
-    PASO === 13 ? (
-      <UserProfileCard
-        fullName="Ana García"
-        email="ana@ejemplo.com"
-        role="admin"
-        isActive={true}
-        skills={['TypeScript', 'React', 'Node.js']}
-        bio="Desarrolladora fullstack con 5 años de experiencia."
-      />
-    ) :
-     */
+   
+    PASO === 11 ? <VehiculosTable title="Teclado inalámbrico" description="Bluetooth 5.0, retroiluminado" highlighted /> :
+
     <p style={{ color: '#e00' }}>Paso {PASO}: crea el componente primero</p>
 
   return (
