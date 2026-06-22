@@ -19,6 +19,9 @@ import StatusBadge         from './components/StatusBadge'
 import MiniProfileCard     from './components/MiniProfileCard'
 
 import SimpleInfoTable     from './components/SimpleInfoTable'
+import DigitalCounter from './components/DigitalCounter'
+
+import UserProfileForm from './components/UserProfileForm'
 /*
 import ProductCard         from './components/ProductCard'
 import ProductCatalogList  from './components/ProductCatalogList'
@@ -29,6 +32,7 @@ import UserProfileCard     from './components/UserProfileCard'
 // │   1  WelcomeBanner       — banner estático sin props                    │
 // │   2  UserGreeting        — props string + cálculo de iniciales          │
 // │   3  CurrentDateDisplay  — fecha calculada al renderizar                │
+
 // │   4  ColoredBox          — estilos dinámicos con props numéricas        │
 // │   5  ConditionalGreeting — renderizado condicional + tipo unión         │
 // │   6  FruitList           — lista tipada con .map()                      │
@@ -40,7 +44,7 @@ import UserProfileCard     from './components/UserProfileCard'
 // │  12  ProductCatalogList  — lista con renderizado condicional de items   │
 // │  13  UserProfileCard     — ejercicio: props complejas + rol             │
 // └──────────────────────────────────────────────────────────────────────────┘
-const PASO = 10
+const PASO = 13
 
 const fruits = [
   { name: 'Manzana', emoji: '🍎', calories: 52 },
@@ -119,6 +123,10 @@ export default function App() {
    
     PASO === 11 ? <VehiculosTable title="Teclado inalámbrico" description="Bluetooth 5.0, retroiluminado" highlighted /> :
 
+    PASO === 12 ? <DigitalCounter label="Contador" step={1} />:
+
+    PASO === 13 ? <UserProfileForm /> :
+    
     <p style={{ color: '#e00' }}>Paso {PASO}: crea el componente primero</p>
 
   return (
