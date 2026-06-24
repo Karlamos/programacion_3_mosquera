@@ -19,9 +19,7 @@ import StatusBadge         from './components/StatusBadge'
 import MiniProfileCard     from './components/MiniProfileCard'
 
 import SimpleInfoTable     from './components/SimpleInfoTable'
-import DigitalCounter from './components/DigitalCounter'
 
-import UserProfileForm from './components/UserProfileForm'
 /*
 import ProductCard         from './components/ProductCard'
 import ProductCatalogList  from './components/ProductCatalogList'
@@ -44,7 +42,8 @@ import UserProfileCard     from './components/UserProfileCard'
 // │  12  ProductCatalogList  — lista con renderizado condicional de items   │
 // │  13  UserProfileCard     — ejercicio: props complejas + rol             │
 // └──────────────────────────────────────────────────────────────────────────┘
-const PASO = 13
+const PASO = 11
+
 
 const fruits = [
   { name: 'Manzana', emoji: '🍎', calories: 52 },
@@ -123,9 +122,6 @@ export default function App() {
    
     PASO === 11 ? <VehiculosTable title="Teclado inalámbrico" description="Bluetooth 5.0, retroiluminado" highlighted /> :
 
-    PASO === 12 ? <DigitalCounter label="Contador" step={1} />:
-
-    PASO === 13 ? <UserProfileForm /> :
     
     <p style={{ color: '#e00' }}>Paso {PASO}: crea el componente primero</p>
 
