@@ -1,68 +1,82 @@
-// src/pages/private/PostsPage.tsx
-import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
-import { getPosts, deletePost } from '@/api/posts.api'
-import type { Post } from '@/types/post.types'
+// src/pages/private/ProfilePage.tsx
+import { useEffect, useRef, useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { z } from 'zod'
+import { useAuthStore } from '@/store/auth.store'
+import { getUser, updateUser, uploadProfileImage } from '@/api/users.api'
+import { profileImageUrl } from '@/lib/urls'
+import { avatarColor } from '@/lib/avatar-color'
+import { cn } from '@/lib/utils'
+import type { User } from '@/types/user.types'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
-import PostFormDialog from '@/components/private/PostFormDialog'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
 
-export default function PostsPage() {
-  const [posts, setPosts] = useState<Post[]>([])
-  const [editing, setEditing] = useState<Post | null>(null)
-  const [dialogOpen, setDialogOpen] = useState(false)
+const schema = z.object({
+  username: z.string().min(3, 'Mínimo 3 caracteres'),
+  email: z.string().email('Email inválido'),
+})
+type FormValues = z.infer<typeof schema>
 
-  const load = async () => {
-    const result = await getPosts({ limit: 50 })
-    setPosts(result.items)
+export default function ProfilePage() {
+  const userId = useAuthStore((s) => s.userId)
+  const [user, setUser] = useState<User | null>(null)
+  const fileInputRef = useRef<HTMLInputElement>(null)
+
+  const { register, handleSubmit, reset, formState: { errors, isSubmitting } } =
+    useForm<FormValues>({ resolver: zodResolver(schema) })
+
+  useEffect(() => {
+    if (userId) getUser(userId).then((u) => { setUser(u); reset({ username: u.username, email: u.email }) })
+  }, [userId, reset])
+
+  const onSubmit = async (values: FormValues) => {
+    if (!userId) return
+    const updated = await updateUser(userId, values)
+    setUser(updated)
   }
 
-  useEffect(() => { load() }, [])
-
-  const handleDelete = async (id: string) => {
-    await deletePost(id)
-    load()
+  const handleAvatarChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (!file || !userId) return
+    const updated = await uploadProfileImage(userId, file)
+    setUser(updated)
   }
+
+  if (!user) return <div className="p-8 text-muted-foreground">Cargando...</div>
 
   return (
-    <div className="mx-auto max-w-3xl space-y-4 p-8">
-      <div className="flex items-center justify-between">
-        <h1 className="text-xl font-semibold">Posts</h1>
-        <Button onClick={() => { setEditing(null); setDialogOpen(true) }}>Nuevo post</Button>
+    <div className="mx-auto max-w-sm space-y-6 p-8">
+      <h1 className="text-xl font-semibold">Mi perfil</h1>
+      <div className="flex flex-col items-center gap-3">
+        <Avatar className="h-24 w-24">
+          <AvatarImage src={profileImageUrl(user.profile)} />
+          <AvatarFallback className={cn(avatarColor(user.username), 'text-2xl text-white')}>
+            {user.username.slice(0, 2).toUpperCase()}
+          </AvatarFallback>
+        </Avatar>
+        <input ref={fileInputRef} type="file" accept="image/jpeg,image/png" hidden onChange={handleAvatarChange} />
+        <Button variant="outline" size="sm" onClick={() => fileInputRef.current?.click()}>
+          Cambiar foto
+        </Button>
       </div>
-      <Table>
-        <TableHeader>
-          <TableRow><TableHead>Título</TableHead><TableHead>Categoría</TableHead><TableHead /></TableRow>
-        </TableHeader>
-        <TableBody>
-          {posts.map((post) => (
-            <TableRow key={post.id}>
-              <TableCell>
-                <Link to={`/posts/${post.id}`} className="hover:underline">{post.title}</Link>
-              </TableCell>
-              <TableCell><Badge variant="secondary">{post.category?.name}</Badge></TableCell>
-              <TableCell className="flex justify-end gap-2">
-                <Button variant="outline" size="sm" onClick={() => { setEditing(post); setDialogOpen(true) }}>
-                  Editar
-                </Button>
-                <Button variant="destructive" size="sm" onClick={() => handleDelete(post.id)}>
-                  Borrar
-                </Button>
-              </TableCell>
-            </TableRow>
-          ))}
-          {posts.length === 0 && (
-            <TableRow><TableCell colSpan={3} className="text-center text-muted-foreground">No hay posts todavía.</TableCell></TableRow>
-          )}
-        </TableBody>
-      </Table>
-      <PostFormDialog
-        open={dialogOpen}
-        onOpenChange={setDialogOpen}
-        post={editing}
-        onSaved={load}
-      />
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
+        <div>
+          <Label htmlFor="username">Usuario</Label>
+          <Input id="username" {...register('username')} />
+          {errors.username && <p className="text-sm text-destructive">{errors.username.message}</p>}
+        </div>
+        <div>
+          <Label htmlFor="email">Email</Label>
+          <Input id="email" type="email" {...register('email')} />
+          {errors.email && <p className="text-sm text-destructive">{errors.email.message}</p>}
+        </div>
+        <Button type="submit" disabled={isSubmitting} className="w-full">
+          {isSubmitting ? 'Guardando...' : 'Guardar cambios'}
+        </Button>
+      </form>
     </div>
   )
 }
