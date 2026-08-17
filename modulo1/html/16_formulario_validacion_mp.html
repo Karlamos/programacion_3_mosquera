@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validación de Inscripción</title>
+</head>
+<body>
+    <H1>Validación de Usuario - Cursos</H1>
+    <form action="/procesar" method="post">
+        <fieldset>
+            <legend>Dato de Identidad Obligatorio</legend>
+            <label for="nombre">Nombre Completo</label><br>
+            <input type="text" id="nombre" name="nombre" required><br>
+        </fieldset>
+        <fieldset>
+            <legend>Longitud de Usuario Requerida</legend>
+            <label for="apellido">Nombre de Usuario (Login)</label><br>
+            <input type="text" id="apellido" name="apellido" min="18" max="99">
+        </fieldset>
+
+        <fieldset>
+            <legend>Formato de Código Estudiantil (5 dígitos)</legend>
+            <label for="codigo_postal">Código de Registro</label><br>
+            <input type="text" id="codigo_postal" name="codigo_postal" pattern="[0-9]{5}"><br>
+        </fieldset>
+        <fieldset>
+            <legend>Rango de Edad Permitido</legend>
+            <label for="edad">Edad del Postulante</label><br>
+            <input type="number" id="edad" name="edad" min="18" max="99">
+        </fieldset>
+        <fieldset>
+            <legend>ID de Matrícula Generado</legend>
+            <label for="ref">Número de Referencia</label><br>
+            <input type="text" id="pais" name="pais" value="CURSO-2026" disabled>
+        </fieldset>
+        <fieldset>
+            <legend>Sede de Estudio Asignada</legend>
+            <label for="pais">Ubicación del Servidor</label><br>
+            <input type="text" id="pais" name="pais" value="Ecuador" readonly>
+        </fieldset>
+        <button type="submit">Validar e Inscribir</button>
+    </form>
+</body>
+</html>

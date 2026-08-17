@@ -1,0 +1,1 @@
+console.log("Cargando lista de cursos con nodejs");

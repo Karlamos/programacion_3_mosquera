@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enlaces</title>
+</head>
+<body>
+    <h1>Fprmularios</h1>
+    <form action="/procesar" method="post">
+        <table>
+            <tr>
+                <td>
+                    <label for="nombre">Nombre</label><br>
+                    <input type="text" id="nombre" name="nombre">
+                </td>
+                <td>
+                    <label>Correo Electronico<br>
+                        <input type="email" id="email" name="email">
+                    </label>
+                </td>
+            </tr>
+            <tr>
+    
+                <td> <label for="password">Contraseña</label><br>
+                    <input type="password" id="password" name="password">
+                </td>
+                <td>
+                    <label for="url">Sitio Web</label><br>
+                    <input type="url" id="url" name="url">
+                </td>
+            </tr>
+
+            <tr>
+    
+                <td> <label for="telefono">Telefono</label><br>
+                    <input type="tel" id="telefono" name="telefono">
+                </td>
+                <td>
+                    <label for="buscar"> Buscar</label><br>
+                    <input type="search" id="buscar" name="buscar">
+                </td>
+            </tr>
+
+            <!-- Tipos numericos-->
+            <tr>
+    
+                <td> <label for="edad">Edad</label><br>
+                    <input type="number" id="edad" name="edad" min="0" max="120" step="1">
+                </td>
+                <td>
+                    <label for="Volumen"> Volumen <span id="val-vol">50</span></label><br>
+                    <input type="range" id="volumen" name="volumen" min="0" max="120" value="50"
+                    oninput="document.getElementById('var-vol').textContent=this.value">
+                </td>
+            </tr>
+            <!---->
+            <tr>
+                <td colspan="2">
+                    <h3>Tipos de fecha</h3>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="hora">Fecha de Nacimiento </label><br>
+                    <input type="date" id="dia" name="dia">
+                </td>
+                <td>
+                    <label for="hora">Hora de la cita </label><br>
+                    <input type="time" id="hora" name="hora">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="evento">Inicio del evento </label><br>
+                    <input type="datetime-local" id="evento" name="evento">
+            </tr>
+            <tr>
+                <td>
+                    <label for="mes">Mes de Inicio </label><br>
+                    <input type="month" id="mes" name="mes">
+            </tr>
+            <!---->
+            <tr>
+                <td colspan="2">
+                    <h3>Checkbox y Option</h3>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="checkbox" id="acepto" name="acepto" value="si">
+                    <label for="acepto">Acepto los terminos y condiciones</label><br>
+                </td>
+                <td>
+                    <fieldset>
+                        <legend>
+                            Metodo de Pago
+                        </legend>
+                        <input type="radio" id="tarjeta" name="pago" value="tarjeta">
+                        <label for="tarjeta">Tarjeta de Credito</label><br>
+                        <input type="radio" id="paypal" name="pago" value="paypal">
+                        <label for="paypal">Paypal</label><br>
+                        <input type="radio" id="transferencia" name="pago" value="transferencia">
+                        <label for="transferencia">Transferencia Bancaria</label>
+                    </fieldset>
+                </td>
+            </tr>
+            <!---->
+            <tr>
+                <td colspan="2">
+                    <h3>Utiles</h3>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="color">Color</label><br>
+                    <input type="color" id="color" name="color" value="#3b82f6">
+                </td>
+               
+                <td>
+                    <label for="color">Foto de Perfil</label><br>
+                    <input type="file" id="foto" name="foto" value="image/">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="docs">Documento</label><br>
+                    <input type="file" id="docs" name="documentos" accept=".pdf,.doc,.docx">
+                </td>
+               
+                <td>
+                    <input type="hidden" id="token" name="token" value="abcd123xyz">
+                </td>
+            </tr>
+            <!---->
+            <tr>
+                <td colspan="2">
+                    <h3>Texturas y Select</h3>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="mensaje">Mensaje</label><br>
+                    <textarea id="mensaje" 
+                    name="mensaje" 
+                    rows="6" 
+                    cols="50" 
+                    placeholder="Escibe tu mensaje aqui"></textarea>
+                </td>
+               
+                <td>
+                    <label for="pais">Pais:</label><br>
+                    <select  id="pais" name="pais">
+                        <option value="">---Seleccione un Pais---</option>
+                        <option value="co">Colombia</option>
+                        <option value="ec">Ecuador</option>
+                        <option value="es">España</option>
+                        <option value="ve">Venezuela</option>
+                    </select>
+                </td>
+            </tr>
+
+            <!--Select con optgroup--> 
+            <tr>
+                <td>
+                    <label for="ciudad">Cuidades:</label><br>
+                    <select  id="ciudad" name="ciudad">
+                        <optgroup label="España">
+                            <option value="co">Madrid</option>
+                            <option value="ec">Barcelona</option>
+                            <option value="es">Sevilla</option>
+                        </optgroup>
+                        <optgroup label="Ciudad de Mexico">
+                            <option value="co">Guadalajara</option>
+                        </optgroup>
+                        <optgroup label="Venezuela">
+                            <option value="co">Coro</option>
+                            <option value="ec">Maracaibo</option>
+                        </optgroup>
+                    </select>
+                </td>
+
+                <!--Select multiple--> 
+                <td>
+                    <label for="skill">Habilidades:</label><br>
+                    <select  id="skill" name="habilidades[]" multiple size="4">
+
+                        <option value="html5">HTML5</option>
+                        <option value="ccs3">CSS3</option>
+                        <option value="js">Javascript</option>
+                        <option value="ts">Typescript</option>
+
+                    </select>
+                </td>
+            </tr>
+
+        </table>
+        
+        <button type="submit">Enviar</button>
+        <button type="reset">Limpiar</button>
+        <button type="button">Aceptar</button>
+    </form>
+</body>
+</html>
